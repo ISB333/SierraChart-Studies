@@ -54,8 +54,9 @@ SCSFExport scsf_VolumeAtPriceMultiplierControl(SCStudyInterfaceRef sc)
 		else if (sc.MenuEventID == Decrementation.GetInt()) // Decrease Multiplier
 		{
 			sc.SetCustomStudyControlBarButtonEnable(Decrementation.GetInt(), false);
-			if (sc.VolumeAtPriceMultiplier - Multiplier.GetInt())
-				sc.SetPersistentInt(0, sc.VolumeAtPriceMultiplier - Multiplier.GetInt());
+			if (sc.VolumeAtPriceMultiplier - Multiplier.GetInt() < 1 || sc.VolumeAtPriceMultiplier == 1)
+                                return ;
+			sc.SetPersistentInt(0, sc.VolumeAtPriceMultiplier - Multiplier.GetInt());
 		}
 		sc.RecalculateChart(sc.ChartNumber);
 	}
