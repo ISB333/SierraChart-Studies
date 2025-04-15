@@ -176,8 +176,10 @@ SCSFExport scsf_TradeManagementByStudyv2(SCStudyInterfaceRef sc)
 	{
 		if (Input_DetailedLogging.GetYesNo())
 			sc.AddMessageToLog("Trailing turned OFF", 1);
-		Input_Enabled.SetYesNo(0);
+		sc.SetPersistentInt(4, abs(PositionData.PositionQuantity));
 		sc.SetCustomStudyControlBarButtonEnable(Input_ACSButtonNumber.GetInt(), false);
+		Input_Enabled.SetYesNo(0);
+		return ;
 	}
 
 	//For safety we must never do any order management while historical data is being downloaded.
